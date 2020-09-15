@@ -1,4 +1,4 @@
-class Container<AnyType extends Number>{
+class Container<AnyType>{
     private AnyType value;
 
     public AnyType getValue() {
