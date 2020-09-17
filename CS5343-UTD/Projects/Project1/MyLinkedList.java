@@ -117,11 +117,26 @@ public class MyLinkedList<AnyType> implements Iterable<AnyType>
 
     private Boolean swapNodes(int idx1, int idx2){
         if(idx1 > size() || idx1 < 0 || idx2 > size() || idx2 < 0){
-            throw new IndexOutOfBoundsException( "Please enter correct indexs");
+            throw new IndexOutOfBoundsException( "Your entered index is out of the size of the list");
         }
         else if(idx1 - idx2 == -1 || idx1 - idx2 == 1 ){
-            
-        }else{
+                if(idx1>idx2){
+                    int temp;
+                    temp = idx2;
+                    idx2 = idx1;
+                    idx1 = temp;
+                }   
+                Node<AnyType> node1 = getNode(idx1);
+                Node<AnyType> node2 = getNode(idx2);
+                Node<AnyType> bufferNode = new Node<>(null,node1.prev, node2.next);
+                node2.next = node1;
+                node1.prev = node2;
+                node1.next = bufferNode.next;
+                node2.prev = bufferNode.prev;
+                node2.prev.next = node2;
+                node1.next.prev = node1; 
+            }
+            else{
             Node<AnyType> node1 = getNode(idx1);
             Node<AnyType> node2 = getNode(idx2);
             Node<AnyType> bufferNode = new Node<>(null,node1.prev,node1.next);
@@ -302,7 +317,7 @@ class TestLinkedList
                 lst.add( i );
         for( int i = 20; i < 30; i++ )
                 lst.add( 0, i );
-        lst.swap(0, lst.size()-1);
+        lst.swap(1, 0);
         System.out.println(lst);
 
         lst.remove( 0 );
