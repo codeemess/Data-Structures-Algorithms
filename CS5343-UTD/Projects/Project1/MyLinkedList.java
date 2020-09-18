@@ -158,11 +158,11 @@ public class MyLinkedList<AnyType> implements Iterable<AnyType>
     }
 
     private boolean eraseElements(int startIdx, int totalElements){
-        if(startIdx < 0 || startIdx > size() || startIdx + totalElements -1 > size() || startIdx + totalElements < 0){
+        if(startIdx < 0 || startIdx > size() || startIdx + totalElements  > size() || startIdx + totalElements < 0){
             throw new IndexOutOfBoundsException( "Your entered index is out of the size of the list");
         }else{
             Node<AnyType> startNode = getNode(startIdx);
-            Node<AnyType> endNode = getNode(startIdx+totalElements-1);
+            Node<AnyType> endNode = getNode(startIdx+totalElements);
             startNode.prev.next = endNode.next; 
         }
         return true;
@@ -340,7 +340,7 @@ class TestLinkedList
         lst.remove( lst.size( ) -1);
 
         System.out.println( lst );
-        lst.erase(0, 18);
+        lst.erase(0, 17);
         System.out.println(lst);
         java.util.Iterator<Integer> itr = lst.iterator( );
         while( itr.hasNext( ) )
