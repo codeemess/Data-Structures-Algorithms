@@ -168,6 +168,31 @@ public class MyLinkedList<AnyType> implements Iterable<AnyType>
         return true;
     }
 
+    public boolean shift(int noOfShifts){
+        shiftList(noOfShifts);
+        return true;
+    }
+    
+    private boolean shiftList(int noOfShifts){
+        if(noOfShifts > 0){
+            if(noOfShifts > size()){
+                noOfShifts = noOfShifts % size();
+            }
+            int k = noOfShifts;
+            Node<AnyType> firstNode =  getNode(0);
+            Node<AnyType> lastNode = getNode(size()-1);
+            Node<AnyType> kthNode = getNode(k);
+            beginMarker.next = kthNode;
+            kthNode.prev.next = endMarker;
+            endMarker.prev = kthNode.prev;
+            kthNode.prev = beginMarker;
+            lastNode.next = firstNode;
+            firstNode.prev = lastNode;
+        }else{
+
+        }
+        return true;
+    }
 
     /**
      * Gets the Node at position idx, which must range from 0 to size( ) - 1.
@@ -340,14 +365,12 @@ class TestLinkedList
         lst.remove( lst.size( ) -1);
 
         System.out.println( lst );
-        lst.erase(0, 17);
+        lst.erase(0, 1);
+
         System.out.println(lst);
-        java.util.Iterator<Integer> itr = lst.iterator( );
-        while( itr.hasNext( ) )
-        {
-                itr.next( );
-                itr.remove( );
-                System.out.println( lst );
-        }
+
+        lst.shift(5);
+        System.out.println(lst);
+        
     }
 }
