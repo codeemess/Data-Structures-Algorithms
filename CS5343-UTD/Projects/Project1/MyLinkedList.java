@@ -179,15 +179,17 @@ public class MyLinkedList<AnyType> implements Iterable<AnyType>
                 noOfShifts = noOfShifts % size();
             }
             int k = noOfShifts;
-            Node<AnyType> firstNode =  getNode(0);
-            Node<AnyType> lastNode = getNode(size()-1);
+            //Node<AnyType> firstNode =  getNode(0);
+            //Node<AnyType> lastNode = getNode(size()-1);
             Node<AnyType> kthNode = getNode(k);
+            endMarker.prev.next = beginMarker.next;
+            beginMarker.next.prev = endMarker.prev;
             beginMarker.next = kthNode;
             kthNode.prev.next = endMarker;
             endMarker.prev = kthNode.prev;
             kthNode.prev = beginMarker;
-            lastNode.next = firstNode;
-            firstNode.prev = lastNode;
+            //lastNode.next = firstNode;
+            //firstNode.prev = lastNode;
         }else{
 
         }
