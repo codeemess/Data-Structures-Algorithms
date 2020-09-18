@@ -191,7 +191,18 @@ public class MyLinkedList<AnyType> implements Iterable<AnyType>
             //lastNode.next = firstNode;
             //firstNode.prev = lastNode;
         }else{
-
+            if((noOfShifts * -1) > size()){
+                noOfShifts = noOfShifts % size();
+            }
+            //System.out.println(noOfShifts);
+            int k = (size()- (noOfShifts*-1));
+            Node<AnyType> kthNode = getNode(k);
+            endMarker.prev.next = beginMarker.next;
+            beginMarker.next.prev = endMarker.prev;
+            beginMarker.next = kthNode;
+            kthNode.prev.next = endMarker;
+            endMarker.prev = kthNode.prev;
+            kthNode.prev = beginMarker;
         }
         return true;
     }
@@ -372,6 +383,8 @@ class TestLinkedList
         System.out.println(lst);
 
         lst.shift(5);
+        System.out.println(lst);
+        lst.shift(-5);
         System.out.println(lst);
         
     }
