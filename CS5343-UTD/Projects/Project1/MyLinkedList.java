@@ -150,8 +150,24 @@ public class MyLinkedList<AnyType> implements Iterable<AnyType>
             node1.next.prev = node1;
         }
         return true;
-
     }
+
+    public boolean erase(int startIdx, int totalElements){
+        eraseElements(startIdx, totalElements);
+        return true;
+    }
+
+    private boolean eraseElements(int startIdx, int totalElements){
+        if(startIdx < 0 || startIdx > size() || startIdx + totalElements -1 > size() || startIdx + totalElements < 0){
+            throw new IndexOutOfBoundsException( "Your entered index is out of the size of the list");
+        }else{
+            Node<AnyType> startNode = getNode(startIdx);
+            Node<AnyType> endNode = getNode(startIdx+totalElements-1);
+            startNode.prev.next = endNode.next; 
+        }
+        return true;
+    }
+
 
     /**
      * Gets the Node at position idx, which must range from 0 to size( ) - 1.
@@ -324,7 +340,8 @@ class TestLinkedList
         lst.remove( lst.size( ) -1);
 
         System.out.println( lst );
-
+        lst.erase(0, 18);
+        System.out.println(lst);
         java.util.Iterator<Integer> itr = lst.iterator( );
         while( itr.hasNext( ) )
         {
