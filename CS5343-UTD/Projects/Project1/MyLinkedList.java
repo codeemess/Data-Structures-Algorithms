@@ -1,3 +1,5 @@
+import java.util.Iterator;
+import java.util.List;
 
 /**
  * LinkedList class implements a doubly-linked list.
@@ -163,7 +165,7 @@ public class MyLinkedList<AnyType> implements Iterable<AnyType>
         }else{
             Node<AnyType> startNode = getNode(startIdx);
             Node<AnyType> endNode = getNode(startIdx+totalElements);
-            startNode.prev.next = endNode.next; 
+            startNode.prev.next = endNode.next;
         }
         return true;
     }
@@ -212,12 +214,20 @@ public class MyLinkedList<AnyType> implements Iterable<AnyType>
         return true;
     }
 
-    private boolean copyList(MyLinkedList<AnyType> lst, int idx){
+    private boolean copyList(MyLinkedList<AnyType> inp, int idx){
         if (idx<0 || idx > size() - 1){
             throw new IndexOutOfBoundsException( "Your entered index is out of the size of the list");
         }
+        // 1234 5678  12567834 2
         else{
-
+            Node<AnyType> start = getNode(idx);
+            Node<AnyType> next = getNode(idx+1);
+            Node<AnyType> inpStart = inp.getNode(0);
+            Node<AnyType> inpEnd = inp.getNode(inp.size()-1); 
+            start.next = inpStart;
+            inpStart.prev = start;
+            inpEnd.next = next;
+            next.prev = inpEnd;
         }
         return true;
     }
