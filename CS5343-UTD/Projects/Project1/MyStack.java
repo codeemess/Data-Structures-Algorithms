@@ -42,5 +42,13 @@ public class MyStack<AnyType>{
         }
         return false;
     }
+
+    public void reset(){
+        flush();
+    }
+
+    private void flush(){
+        list = new ArrayList<>();
+    }
     
 }
