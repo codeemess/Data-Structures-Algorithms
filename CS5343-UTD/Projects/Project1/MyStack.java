@@ -52,3 +52,53 @@ public class MyStack<AnyType>{
     }
     
 }
+class NestedSymbolAlgorithm {
+
+    static boolean areParanthesisBalanced(String s){
+        MyStack<Character> stack = new MyStack<>();
+        for(int i=0; i<s.length(); i++){
+            char currentChar = s.charAt(i);
+            if(currentChar == '(' || currentChar == '[' || currentChar == '{'){
+                stack.push(currentChar);
+                continue;
+            }
+            else if(currentChar == ')'|| currentChar == '}' || currentChar == ']'){
+                if (stack.isEmpty()){
+                    return false;
+                }
+                char element = stack.pop();
+                switch(currentChar){
+                    
+                    case ')':
+                    if(element == '{' || element == '[')
+                        return false;
+                    break;
+                    
+                    case ']':
+                    if(element == '{' || element == '(')
+                        return false;
+                    break;
+                    
+                    case '}':
+                    if(element == '[' || element == '(')
+                        return false;
+                    break;
+                    
+                }  
+            }
+        }
+        return stack.isEmpty();
+    }
+    public static void main(String[] args) {
+        String[] expressions = new String[3];
+        expressions[0] = "[({})]";
+        expressions[1] = "[[[]]";
+        expressions[2] = "({{{}}}})(";
+
+        for(int i=0; i<expressions.length;i++){
+            if(areParanthesisBalanced(expressions[i]))
+                System.out.println("Expression is Balanced");
+            else System.out.println("Expression is Not Balanced");
+        }
+    }
+}
