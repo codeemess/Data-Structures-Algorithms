@@ -486,7 +486,7 @@ class TestLinkedList
         System.out.println("Shift forward (towards head) with argument 5");
         lst.shift(5);
         System.out.println(lst);
-        System.out.println("Shift backward (towards tail with argument -5");
+        System.out.println("Shift backward (towards tail) with argument -5");
         lst.shift(-5);
         System.out.println(lst);
 
