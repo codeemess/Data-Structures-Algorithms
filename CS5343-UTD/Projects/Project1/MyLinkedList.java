@@ -210,24 +210,22 @@ public class MyLinkedList<AnyType> implements Iterable<AnyType>
     }
 
     public boolean insertList(MyLinkedList<AnyType> lst, int idx ){
-        copyList(lst, idx);
+        insertListAtIndex(lst, idx);
         return true;
     }
 
-    private boolean copyList(MyLinkedList<AnyType> inp, int idx){
+    private boolean insertListAtIndex(MyLinkedList<AnyType> inp, int idx){
         if (idx<0 || idx > size() - 1){
             throw new IndexOutOfBoundsException( "Your entered index is out of the size of the list");
         }
         // 1234 5678  12567834 2
         else{
-            Node<AnyType> start = getNode(idx);
-            Node<AnyType> next = getNode(idx+1);
-            Node<AnyType> inpStart = inp.getNode(0);
-            Node<AnyType> inpEnd = inp.getNode(inp.size()-1); 
-            start.next = inpStart;
-            inpStart.prev = start;
-            inpEnd.next = next;
-            next.prev = inpEnd;
+            Node<AnyType> kthNode = getNode(idx);
+            inp.endMarker.prev.next = kthNode.next;
+            kthNode.next.prev = inp.endMarker.prev;
+            inp.beginMarker.next.prev = kthNode;
+            kthNode.next = inp.beginMarker.next;
+            
         }
         return true;
     }
