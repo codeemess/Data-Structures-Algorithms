@@ -1,6 +1,18 @@
 import java.util.Iterator;
 import java.util.List;
 
+/*
+--------------------------------------------------EXECUTION INSTRUCTIONS----------------------------------------------------
+To Run the code and see the output on the terminal/command-prompt type
+1. javac MyLinkedList.java
+2. java TestLinkedList
+
+To see the written code for this project, scroll down to find it after Mark Allen Weiss' Code Block or at line no
+---------------------------------------------END OF EXECUTION INSTRUCTIONS----------------------------------------------*/
+
+
+/*-------------------------------------------------MARK ALLEN WEISS' CODE-----------------------------------------------*/
+
 /**
  * LinkedList class implements a doubly-linked list.
  */
@@ -112,123 +124,6 @@ public class MyLinkedList<AnyType> implements Iterable<AnyType>
         return oldVal;
     }
 
-    public Boolean swap(int idx1, int idx2){
-        swapNodes(idx1,idx2);
-        return true;
-    }
-
-    private Boolean swapNodes(int idx1, int idx2){
-        if(idx1 > size() || idx1 < 0 || idx2 > size() || idx2 < 0){
-            throw new IndexOutOfBoundsException( "Your entered index is out of the size of the list");
-        }
-        else if(idx1 - idx2 == -1 || idx1 - idx2 == 1 ){
-                if(idx1>idx2){
-                    int temp;
-                    temp = idx2;
-                    idx2 = idx1;
-                    idx1 = temp;
-                }   
-                Node<AnyType> node1 = getNode(idx1);
-                Node<AnyType> node2 = getNode(idx2);
-                Node<AnyType> bufferNode = new Node<>(null,node1.prev, node2.next);
-                node2.next = node1;
-                node1.prev = node2;
-                node1.next = bufferNode.next;
-                node2.prev = bufferNode.prev;
-                node2.prev.next = node2;
-                node1.next.prev = node1; 
-            }
-            else{
-            Node<AnyType> node1 = getNode(idx1);
-            Node<AnyType> node2 = getNode(idx2);
-            Node<AnyType> bufferNode = new Node<>(null,node1.prev,node1.next);
-            node1.prev = node2.prev;
-            node1.next = node2.next;
-            node2.prev = bufferNode.prev;
-            node2.next = bufferNode.next;
-            node2.next.prev = node2;
-            node2.prev.next = node2;
-            node1.prev.next = node1;
-            node1.next.prev = node1;
-        }
-        return true;
-    }
-
-    public boolean erase(int startIdx, int totalElements){
-        eraseElements(startIdx, totalElements);
-        return true;
-    }
-
-    private boolean eraseElements(int startIdx, int totalElements){
-        if(startIdx < 0 || startIdx > size() || startIdx + totalElements  > size() || startIdx + totalElements < 0){
-            throw new IndexOutOfBoundsException( "Your entered index is out of the size of the list");
-        }else{
-            Node<AnyType> startNode = getNode(startIdx);
-            Node<AnyType> endNode = getNode(startIdx+totalElements);
-            startNode.prev.next = endNode.next;
-        }
-        return true;
-    }
-
-    public boolean shift(int noOfShifts){
-        shiftList(noOfShifts);
-        return true;
-    }
-    
-    private boolean shiftList(int noOfShifts){
-        if(noOfShifts > 0){
-            if(noOfShifts > size()){
-                noOfShifts = noOfShifts % size();
-            }
-            int k = noOfShifts;
-            //Node<AnyType> firstNode =  getNode(0);
-            //Node<AnyType> lastNode = getNode(size()-1);
-            Node<AnyType> kthNode = getNode(k);
-            endMarker.prev.next = beginMarker.next;
-            beginMarker.next.prev = endMarker.prev;
-            beginMarker.next = kthNode;
-            kthNode.prev.next = endMarker;
-            endMarker.prev = kthNode.prev;
-            kthNode.prev = beginMarker;
-            //lastNode.next = firstNode;
-            //firstNode.prev = lastNode;
-        }else{
-            if((noOfShifts * -1) > size()){
-                noOfShifts = noOfShifts % size();
-            }
-            //System.out.println(noOfShifts);
-            int k = (size()- (noOfShifts*-1));
-            Node<AnyType> kthNode = getNode(k);
-            endMarker.prev.next = beginMarker.next;
-            beginMarker.next.prev = endMarker.prev;
-            beginMarker.next = kthNode;
-            kthNode.prev.next = endMarker;
-            endMarker.prev = kthNode.prev;
-            kthNode.prev = beginMarker;
-        }
-        return true;
-    }
-
-    public boolean insertList(MyLinkedList<AnyType> lst, int idx ){
-        insertListAtIndex(lst, idx);
-        return true;
-    }
-
-    private boolean insertListAtIndex(MyLinkedList<AnyType> inp, int idx){
-        if (idx<0 || idx > size() - 1){
-            throw new IndexOutOfBoundsException( "Your entered index is out of the size of the list");
-        }
-        // 1234 5678  12567834 2
-        else{
-            Node<AnyType> kthNode = getNode(idx);
-            inp.endMarker.prev.next = kthNode.next;
-            kthNode.next.prev = inp.endMarker.prev;
-            inp.beginMarker.next.prev = kthNode;
-            kthNode.next = inp.beginMarker.next;
-            
-        }
-        return true;
-    }
     /**
      * Gets the Node at position idx, which must range from 0 to size( ) - 1.
      * @param idx index to search at.
@@ -360,7 +255,7 @@ public class MyLinkedList<AnyType> implements Iterable<AnyType>
             okToRemove = false;       
         }
     }
-    
+
     /**
      * This is the doubly-linked list node.
      */
@@ -380,15 +275,187 @@ public class MyLinkedList<AnyType> implements Iterable<AnyType>
     private int modCount = 0;
     private Node<AnyType> beginMarker;
     private Node<AnyType> endMarker;
+
+/*------------------------------------------------------END OF MARK ALLEN WEISS' CODE-------------------------------------------------*/
+
+/*------------------------------------------------------PROJECT 1 CODE BEGINS HERE----------------------------------------------------*/
+
+    /**
+     * Swaps the nodes at given indexes
+     * @param idx1 @param idx2 the node-indices to be swapped.
+     * @return true.
+     * @throws IndexOutOfBoundsException if any given index is out of size.
+     */
+    
+     public Boolean swap(int idx1, int idx2){
+        swapNodes(idx1,idx2);
+        return true;
+    }
+
+    /**
+     * Swaps the nodes at given indexes
+     * @param idx1 @param idx2 the node-indices to be swapped.
+     * * @throws IndexOutOfBoundsException if any given index is out of size.
+     * checks if the nodes are adjacent and adjusts pointers accordingly
+     * if the nodes are non adjacent then adjusts the pointers accordingly
+     * swaps the nodes correctly even when entered indices are not in ascending order.
+     * @return true.
+     */
+
+    private Boolean swapNodes(int idx1, int idx2){
+        if(idx1 > size() || idx1 < 0 || idx2 > size() || idx2 < 0){
+            throw new IndexOutOfBoundsException( "Your entered index is out of the size of the list");
+        }
+        if(idx1>idx2){
+            int temp;
+            temp = idx2;
+            idx2 = idx1;
+            idx1 = temp;
+        } 
+        if(idx1 - idx2 == -1 || idx1 - idx2 == 1 ){
+                Node<AnyType> node1 = getNode(idx1);
+                Node<AnyType> node2 = getNode(idx2);
+                Node<AnyType> bufferNode = new Node<>(null,node1.prev, node2.next);
+                node2.next = node1;
+                node1.prev = node2;
+                node1.next = bufferNode.next;
+                node2.prev = bufferNode.prev;
+                node2.prev.next = node2;
+                node1.next.prev = node1; 
+            }
+            else{
+            Node<AnyType> node1 = getNode(idx1);
+            Node<AnyType> node2 = getNode(idx2);
+            Node<AnyType> bufferNode = new Node<>(null,node1.prev,node1.next);
+            node1.prev = node2.prev;
+            node1.next = node2.next;
+            node2.prev = bufferNode.prev;
+            node2.next = bufferNode.next;
+            node2.next.prev = node2;
+            node2.prev.next = node2;
+            node1.prev.next = node1;
+            node1.next.prev = node1;
+        }
+        return true;
+    }
+
+    /**
+     * shifts the list towards the head or tail according to given @param noOfShifts
+     * @return true.
+     */ 
+
+    public boolean shift(int noOfShifts){
+        shiftList(noOfShifts);
+        return true;
+    }
+
+    /**
+     * shifts the list towards the head or tail according to given @param noOfShifts is positive or negative respectively
+     * @return true.
+     * shifts it appropriately even if the @param noOfShifts is greater than size of given list
+     * Adjusts the pointers using first node, last node and the node at @param noOfShifts (k)
+     */ 
+
+    private boolean shiftList(int noOfShifts){
+        if(noOfShifts > 0){
+            if(noOfShifts > size()){
+                noOfShifts = noOfShifts % size();
+            }
+            int k = noOfShifts;
+            Node<AnyType> kthNode = getNode(k);
+            endMarker.prev.next = beginMarker.next;
+            beginMarker.next.prev = endMarker.prev;
+            beginMarker.next = kthNode;
+            kthNode.prev.next = endMarker;
+            endMarker.prev = kthNode.prev;
+            kthNode.prev = beginMarker;
+
+        }else{
+            if((noOfShifts * -1) > size()){
+                noOfShifts = noOfShifts % size();
+            }
+            int k = (size()- (noOfShifts*-1));
+            Node<AnyType> kthNode = getNode(k);
+            endMarker.prev.next = beginMarker.next;
+            beginMarker.next.prev = endMarker.prev;
+            beginMarker.next = kthNode;
+            kthNode.prev.next = endMarker;
+            endMarker.prev = kthNode.prev;
+            kthNode.prev = beginMarker;
+        }
+        return true;
+    }
+
+    /**
+     * removes the elements from @param startIdx to the location (@param startIdx +  @param totalElements)
+     * @throws IndexOutOfBoundsException if the startIdx or startIdx + totalElements if greater than size or less than 0
+     * @return true.
+     */ 
+
+    public boolean erase(int startIdx, int totalElements){
+        eraseElements(startIdx, totalElements);
+        return true;
 }
+
+    /**
+     * removes the elements from @param startIdx to the location (@param startIdx +  @param totalElements)
+     * @throws IndexOutOfBoundsException if the startIdx or startIdx + totalElements if greater than size or less than 0
+     * Adjusts the pointers using Nodes at startIdx and end startIdx+totalElements.
+     * @return true.
+     */ 
+
+    private boolean eraseElements(int startIdx, int totalElements){
+        if(startIdx < 0 || startIdx > size() || startIdx + totalElements  > size() || startIdx + totalElements < 0){
+            throw new IndexOutOfBoundsException( "Your entered index is out of the size of the list");
+        }else{
+            Node<AnyType> startNode = getNode(startIdx);
+            Node<AnyType> endNode = getNode(startIdx+totalElements);
+            startNode.prev.next = endNode.next;
+        }
+        return true;
+    }
+
+    /**
+     * Inserts the @param lst at the given @param idx
+     * @throws IndexOutOfBoundsException if the given @param idx is out of size or less than 0
+     * @return true.
+     */ 
+    public boolean insertList(MyLinkedList<AnyType> lst, int idx ){
+        insertListAtIndex(lst, idx);
+        return true;
+    }
+
+    /**
+     * Inserts the @param lst at the given @param idx
+     * @throws IndexOutOfBoundsException if the given @param idx is out of size or less than 0
+     * Attaches the given list to the Node at @param idx and makes adjustments.
+     * @return true.
+     */ 
+    private boolean insertListAtIndex(MyLinkedList<AnyType> inp, int idx){
+        if (idx<0 || idx > size() - 1){
+            throw new IndexOutOfBoundsException( "Your entered index is out of the size of the list");
+        }
+        else{
+            Node<AnyType> kthNode = getNode(idx);
+            inp.endMarker.prev.next = kthNode.next;
+            kthNode.next.prev = inp.endMarker.prev;
+            inp.beginMarker.next.prev = kthNode;
+            kthNode.next = inp.beginMarker.next;
+            
+        }
+        return true;
+    }
+
+}
+/*--------------------------------------------------END OF PROJECT 1 CODE -----------------------------------------------------------------*/
+
+/*---------------------------------------THE CLASS BELOW DEMONSTRATES THE CODE IMPLEMENTED ABOVE ------------------------------------------ */
 
 class TestLinkedList
 {
     public static void main( String [ ] args )
     {
         MyLinkedList<Integer> lst = new MyLinkedList<>( );
-        System.out.println(lst.size());
-
         MyLinkedList<Integer> lst2 = new MyLinkedList<>();
         for( int i = 1; i < 10; i++ )
                 lst2.add( i * 10);
@@ -397,7 +464,7 @@ class TestLinkedList
                 lst.add( i );
         for( int i = 20; i < 30; i++ )
                 lst.add( 0, i );
-        lst.swap(1, 0);
+        lst.swap(2, 0);
         System.out.println(lst);
 
         lst.remove( 0 );
