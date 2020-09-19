@@ -455,6 +455,7 @@ class TestLinkedList
 {
     public static void main( String [ ] args )
     {
+        
         MyLinkedList<Integer> lst = new MyLinkedList<>( );
         MyLinkedList<Integer> lst2 = new MyLinkedList<>();
         for( int i = 1; i < 10; i++ )
@@ -464,23 +465,39 @@ class TestLinkedList
                 lst.add( i );
         for( int i = 20; i < 30; i++ )
                 lst.add( 0, i );
+        System.out.println( "--------------------------Current List---------------------------" );
+        System.out.println( lst );
+        
+        System.out.println("-------------------------Swap Demo---------------------------------");
+        System.out.println( "After Swapping at 0,2" );
         lst.swap(2, 0);
         System.out.println(lst);
-
-        lst.remove( 0 );
-        lst.remove( lst.size( ) -1);
-
-        System.out.println( lst );
-        lst.erase(0, 1);
-
+        System.out.println( "After Swapping at 1,0" );
+        lst.swap(1, 0);
         System.out.println(lst);
 
+        System.out.println("----------------------------Erase Demo------------------------------");
+        System.out.println( lst );
+        lst.erase(0, 9);
+        System.out.println("Erase elements through index 0 and 9 elements after");
+        System.out.println(lst);
+        
+        System.out.println("-----------------------------Shift Demo-----------------------------");
+        System.out.println("Shift forward (towards head) with argument 5");
         lst.shift(5);
         System.out.println(lst);
+        System.out.println("Shift backward (towards tail with argument -5");
         lst.shift(-5);
         System.out.println(lst);
 
-        lst.insertList(lst2, 1);
+        System.out.println("--------------------------Insert List Demo---------------------------");
+        System.out.println("Current List");
         System.out.println(lst);
+        System.out.println("list to be inserted");
+        System.out.println(lst2);
+        System.out.println("Inserting the above list at index 2");
+        lst.insertList(lst2, 2);
+        System.out.println(lst);
+        System.out.println("----------End of Demonstration------------------");
     }
 }
