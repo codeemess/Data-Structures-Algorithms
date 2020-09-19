@@ -207,6 +207,20 @@ public class MyLinkedList<AnyType> implements Iterable<AnyType>
         return true;
     }
 
+    public boolean insertList(MyLinkedList<AnyType> lst, int idx ){
+        copyList(lst, idx);
+        return true;
+    }
+
+    private boolean copyList(MyLinkedList<AnyType> lst, int idx){
+        if (idx<0 || idx > size() - 1){
+            throw new IndexOutOfBoundsException( "Your entered index is out of the size of the list");
+        }
+        else{
+
+        }
+        return true;
+    }
     /**
      * Gets the Node at position idx, which must range from 0 to size( ) - 1.
      * @param idx index to search at.
@@ -367,6 +381,10 @@ class TestLinkedList
         MyLinkedList<Integer> lst = new MyLinkedList<>( );
         System.out.println(lst.size());
 
+        MyLinkedList<Integer> lst2 = new MyLinkedList<>();
+        for( int i = 1; i < 10; i++ )
+                lst2.add( i * 10);
+
         for( int i = 0; i < 10; i++ )
                 lst.add( i );
         for( int i = 20; i < 30; i++ )
@@ -386,6 +404,8 @@ class TestLinkedList
         System.out.println(lst);
         lst.shift(-5);
         System.out.println(lst);
-        
+
+        lst.insertList(lst2, 1);
+        System.out.println(lst);
     }
 }
