@@ -323,7 +323,7 @@ public class MyLinkedList<AnyType> implements Iterable<AnyType>
                 node2.prev.next = node2;
                 node1.next.prev = node1; 
             }
-            else{
+        else{
             Node<AnyType> node1 = getNode(idx1);
             Node<AnyType> node2 = getNode(idx2);
             Node<AnyType> bufferNode = new Node<>(null,node1.prev,node1.next);
