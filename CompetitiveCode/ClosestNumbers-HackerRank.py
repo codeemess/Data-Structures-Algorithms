@@ -14,4 +14,4 @@ for ind in range(1, len(numbers)):
             
 flat_list = [item for sublist in output for item in sublist]
 for i in range(0,len(flat_list),2):
-    print(numbers[i], numbers[i+1])
+    print(flat_list[i], flat_list[i+1])
