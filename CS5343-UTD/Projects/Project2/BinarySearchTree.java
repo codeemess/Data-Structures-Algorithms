@@ -19,6 +19,10 @@
  * Note that all "matching" is based on the compareTo method.
  * @author Mark Allen Weiss
  */
+class UnderflowException extends RuntimeException
+{
+}
+
 public class BinarySearchTree<AnyType extends Comparable<? super AnyType>>
 {
     /**
