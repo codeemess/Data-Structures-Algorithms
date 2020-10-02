@@ -418,6 +418,7 @@ public class BinarySearchTree<AnyType extends Comparable<? super AnyType>>
         BinarySearchTree<Integer> t1 = new BinarySearchTree<>( );
         BinarySearchTree<Integer> t2 = new BinarySearchTree<>();
         BinarySearchTree<Integer> t3 = new BinarySearchTree<>();
+        BinarySearchTree<Integer> t4 = new BinarySearchTree<>();
 
         System.out.println("Making Tree 1");
         for(int i = 5; i>0; i--){
@@ -435,32 +436,59 @@ public class BinarySearchTree<AnyType extends Comparable<? super AnyType>>
         }
 
         System.out.println("Demonstrating print level");
+        System.out.println("--------------------------");
         System.out.println("tree 1");
         t1.printLevels();
         System.out.println("tree 2");
         t2.printLevels();
+        System.out.println("--------------------------");
         System.out.println("Demonstrating rotate right");
         t1.rotateRight();
         t1.printLevels();
+        System.out.println("--------------------------");
         System.out.println("Demonstrating rotate left");
         t1.rotateLeft();
         t1.printLevels();
-        System.out.println("Node Count is: ");
+        System.out.println("--------------------------");
+        System.out.println("Demonstrating Node Count, Node Count is: ");
         System.out.println(t1.nodeCount());
+        System.out.println("--------------------------");
         System.out.println("Demonstrating copy");
         t3 = t1.copy();
         t3.printLevels();
-        System.out.println("Demonstrating compare structure in t1 and t2");
+        System.out.println("--------------------------");
+        System.out.println("Demonstrating compare structure on t1 and t2");
         boolean isEqual = t1.compareStructure(t2);
         System.out.println(isEqual);
+        System.out.println("--------------------------");
         System.out.println("Demonstrating mirror and storing t3 as mirror of t1");
         t3 = t1.mirror();
         t3.printLevels();
-        System.out.println("Demonstrating is Mirror in t3 and t1");
+        System.out.println("--------------------------");
+        System.out.println("Demonstrating is Mirror on t3 and t1");
         boolean isMirror = t1.isMirror(t3);
         System.out.println(isMirror);
-        System.out.println("Demonstrating is Mirror in t1 and t2");
+        System.out.println("Demonstrating is Mirror on t1 and t2");
         boolean isMirror2 = t1.isMirror(t2);
         System.out.println(isMirror2);
+        System.out.println("--------------------------");
+        System.out.println("Copying t1 into t3");
+        t3 = t1.copy();
+        boolean isTreeEqual = t1.equals(t3);
+        System.out.println("Demonstrating Equals t1 and t3");
+        System.out.println(isTreeEqual);
+        System.out.println("Demonstrating Equals t1 and t2");
+        System.out.println(t1.equals(t2));
+        System.out.println("--------------------------");
+        System.out.println("Making a full tree t4");
+        t4.insert(2);
+        t4.insert(1);
+        t4.insert(4);
+        t4.printLevels();
+        System.out.println("Demonstrating isFull on t4");
+        System.out.println(t4.isFull());
+        System.out.println("Demonstrating isFull on t1");
+        System.out.println(t1.isFull());
+        System.out.println("--------------------------");
     }
 }
