@@ -379,7 +379,7 @@ public class BinarySearchTree<AnyType extends Comparable<? super AnyType>>
 
     private void printOneLevel(BinaryNode<AnyType> t, int level){
         if(t == null) return;
-        if (level == 1) System.out.println(t.element);
+        if (level == 1) System.out.print(t.element + " ");
         else if(level > 1){
             printOneLevel(t.left, level-1);
             printOneLevel(t.right, level-1);
