@@ -352,6 +352,20 @@ public class BinarySearchTree<AnyType extends Comparable<? super AnyType>>
         root.left = z;
         return x;
     }
+
+    public boolean rotateLeft(){
+        if(root.left == null) return true;
+       root = rotateLeft(root);
+        return true;
+    }
+
+    private BinaryNode<AnyType> rotateLeft(BinaryNode<AnyType> root){
+        BinaryNode<AnyType> x = root.right;
+        BinaryNode<AnyType> z = x.left;
+        x.left = root;
+        root.right = z;
+        return x;
+    }
     // Basic node stored in unbalanced binary search trees
     private static class BinaryNode<AnyType>
     {
@@ -413,6 +427,8 @@ public class BinarySearchTree<AnyType extends Comparable<? super AnyType>>
         System.out.println("---");
         t.insert(-1);
         t.rotateRight();
+        t.printTree();
+        t.rotateLeft();
         t.printTree();
         // t.printTree();
         
