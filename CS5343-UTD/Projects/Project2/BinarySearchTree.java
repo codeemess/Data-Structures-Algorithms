@@ -366,6 +366,26 @@ public class BinarySearchTree<AnyType extends Comparable<? super AnyType>>
         root.right = z;
         return x;
     }
+
+    public void printLevels(){
+        BinaryNode<AnyType> t = root;
+        int height = height(root)+1;
+        System.out.println(height);
+        for(int i =1; i<=height;i++){
+            printOneLevel(t, i);
+            System.out.println();
+        }
+    }
+
+    private void printOneLevel(BinaryNode<AnyType> t, int level){
+        if(t == null) return;
+        if (level == 1) System.out.println(t.element);
+        else if(level > 1){
+            printOneLevel(t.left, level-1);
+            printOneLevel(t.right, level-1);
+        }
+
+    }
     // Basic node stored in unbalanced binary search trees
     private static class BinaryNode<AnyType>
     {
@@ -426,10 +446,13 @@ public class BinarySearchTree<AnyType extends Comparable<? super AnyType>>
         System.out.println(x.isMirror(t));
         System.out.println("---");
         t.insert(-1);
+        t.printLevels();
         t.rotateRight();
-        t.printTree();
-        t.rotateLeft();
-        t.printTree();
+        t.printLevels();
+        // t.printTree();
+        // t.rotateLeft();
+        // t.printTree();
+
         // t.printTree();
         
         // if( NUMS < 40 )
