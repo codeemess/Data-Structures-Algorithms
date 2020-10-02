@@ -1,5 +1,3 @@
-import jdk.nashorn.api.tree.BinaryTree;
-
 // BinarySearchTree class
 //
 // CONSTRUCTION: with no initializer
@@ -222,6 +220,7 @@ public class BinarySearchTree<AnyType extends Comparable<? super AnyType>>
             printTree( t.left );
             System.out.println( t.element );
             printTree( t.right );
+            
         }
     }
 
@@ -339,6 +338,20 @@ public class BinarySearchTree<AnyType extends Comparable<? super AnyType>>
         BinarySearchTree<AnyType> mirrorTree = mirror();
         return equals(t2.root,mirrorTree.root);
     }
+
+    public boolean rotateRight(){
+        if(root.left == null) return true;
+       root = rotateRight(root);
+        return true;
+    }
+
+    private BinaryNode<AnyType> rotateRight(BinaryNode<AnyType> root){
+        BinaryNode<AnyType> x = root.left;
+        BinaryNode<AnyType> z = x.right;
+        x.right = root;
+        root.left = z;
+        return x;
+    }
     // Basic node stored in unbalanced binary search trees
     private static class BinaryNode<AnyType>
     {
@@ -397,6 +410,10 @@ public class BinarySearchTree<AnyType extends Comparable<? super AnyType>>
         x.printTree();
         System.out.println("---");
         System.out.println(x.isMirror(t));
+        System.out.println("---");
+        t.insert(-1);
+        t.rotateRight();
+        t.printTree();
         // t.printTree();
         
         // if( NUMS < 40 )
