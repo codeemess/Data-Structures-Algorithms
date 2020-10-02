@@ -266,6 +266,26 @@ public class BinarySearchTree<AnyType extends Comparable<? super AnyType>>
         }
         return false;
     }
+
+    public boolean compareStructure(BinarySearchTree<AnyType> t2){
+        if(root ==null & t2.root == null){
+            return true;
+        }
+        return compareStructure(root, t2.root);
+
+    }
+
+    private boolean compareStructure(BinaryNode<AnyType> t1, BinaryNode<AnyType> t2){
+        if(t1 == null && t2 == null) return true;
+        if (t1 != null & t2 != null){
+            return (
+                compareStructure(t1.left, t2.left) &&
+                compareStructure(t1.right, t2.right) 
+            );
+        }
+        return false;
+
+    }
     // Basic node stored in unbalanced binary search trees
     private static class BinaryNode<AnyType>
     {
@@ -316,6 +336,8 @@ public class BinarySearchTree<AnyType extends Comparable<? super AnyType>>
         // t.printTree();
         System.out.println(t.nodeCount());
         System.out.println(t.isFull());
+        System.out.println("---");
+        System.out.println(t.compareStructure(t));
         // if( NUMS < 40 )
         //     t.printTree( );
         // if( t.findMin( ) != 2 || t.findMax( ) != NUMS - 2 )
