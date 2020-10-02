@@ -284,9 +284,8 @@ public class BinarySearchTree<AnyType extends Comparable<? super AnyType>>
             );
         }
         return false;
-
     }
-
+    
     public boolean equals(BinarySearchTree<AnyType> t2){
         if(root == null && t2.root == null ){
             return true;
@@ -304,6 +303,20 @@ public class BinarySearchTree<AnyType extends Comparable<? super AnyType>>
             );
         }
         return false;
+    }
+
+    public BinarySearchTree<AnyType> copy(){
+        BinarySearchTree<AnyType> t2= new BinarySearchTree<>();
+        t2.root = copy(root, t2.root);
+        return t2;
+    }
+
+    private BinaryNode<AnyType> copy(BinaryNode<AnyType>t1, BinaryNode<AnyType> t2){
+        if(t1 == null)return null;
+        BinaryNode<AnyType> copy = new BinaryNode<AnyType>(t1.element,null,null);
+        copy.left = copy(t1.left,copy);
+        copy.right = copy(t1.right,copy);
+        return copy;
     }
 
     // Basic node stored in unbalanced binary search trees
@@ -360,6 +373,10 @@ public class BinarySearchTree<AnyType extends Comparable<? super AnyType>>
         System.out.println(t.compareStructure(t));
         System.out.println("---");
         System.out.println(t.equals(t));
+        x = t.copy();
+        x.printTree();
+        System.out.println("---");
+        System.out.println(t.equals(x));
         // if( NUMS < 40 )
         //     t.printTree( );
         // if( t.findMin( ) != 2 || t.findMax( ) != NUMS - 2 )
