@@ -370,7 +370,7 @@ public class BinarySearchTree<AnyType extends Comparable<? super AnyType>>
     public void printLevels(){
         BinaryNode<AnyType> t = root;
         int height = height(root)+1;
-        System.out.println(height);
+        // System.out.println(height);
         for(int i =1; i<=height;i++){
             printOneLevel(t, i);
             System.out.println();
@@ -415,59 +415,28 @@ public class BinarySearchTree<AnyType extends Comparable<? super AnyType>>
         // Test program
     public static void main( String [ ] args )
     {
-        BinarySearchTree<Integer> t = new BinarySearchTree<>( );
+        BinarySearchTree<Integer> t1 = new BinarySearchTree<>( );
         BinarySearchTree<Integer> x = new BinarySearchTree<>();
         x.insert(2);
         x.insert(1);
         x.insert(3);
-        System.out.println(x.isFull());
-        // final int NUMS = 4000;
-        // final int GAP  =   37;
-
-        // System.out.println( "Checking... (no more output means success)" );
-
-        // for( int i = GAP; i != 0; i = ( i + GAP ) % NUMS )
-        //     t.insert( i );
-
-        System.out.println(t.isFull());
-        for(int i = 0; i<10;i++){
-            t.insert(i);
+        // System.out.println(x.isFull());
+        for(int i = 5; i>0; i--){
+            t1.insert(i);
         }
-        // t.printTree();
-        System.out.println(t.nodeCount());
-        System.out.println(t.isFull());
-        System.out.println("---");
-        System.out.println(t.compareStructure(t));
-        System.out.println("---");
-        System.out.println(t.equals(t));
-        x = t.mirror();
-        x.printTree();
-        System.out.println("---");
-        System.out.println(x.isMirror(t));
-        System.out.println("---");
-        t.insert(-1);
-        t.printLevels();
-        t.rotateRight();
-        t.printLevels();
-        // t.printTree();
-        // t.rotateLeft();
-        // t.printTree();
+        for(int i = 5; i<10; i++){
+            t1.insert(i);
+        }
 
-        // t.printTree();
-        
-        // if( NUMS < 40 )
-        //     t.printTree( );
-        // if( t.findMin( ) != 2 || t.findMax( ) != NUMS - 2 )
-        //     System.out.println( "FindMin or FindMax error!" );
-
-        // for( int i = 2; i < NUMS; i+=2 )
-        //      if( !t.contains( i ) )
-        //          System.out.println( "Find error1!" );
-
-        // for( int i = 1; i < NUMS; i+=2 )
-        // {
-        //     if( t.contains( i ) )
-        //         System.out.println( "Find error2!" );
-        // }
+        System.out.println("Demonstrating print level");
+        t1.printLevels();
+        System.out.println("Demonstrating rotate right");
+        t1.rotateRight();
+        t1.printLevels();
+        System.out.println("Demonstrating rotate left");
+        t1.rotateLeft();
+        t1.printLevels();
+        System.out.println("Node Count is: ");
+        System.out.println(t1.nodeCount());
     }
 }
