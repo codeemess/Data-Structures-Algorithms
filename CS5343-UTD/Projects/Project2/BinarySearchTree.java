@@ -251,6 +251,21 @@ public class BinarySearchTree<AnyType extends Comparable<? super AnyType>>
         }
         return count;
     }
+
+    public boolean isFull(){
+        if(isEmpty())
+            return true;
+        
+        else return isFull(root);
+    }
+
+    private boolean isFull(BinaryNode<AnyType> t){
+        if(t.left == null && t.right == null) return true;
+        if (t.left != null && t.right != null){
+            return  (isFull(t.left) && isFull(t.right));
+        }
+        return false;
+    }
     // Basic node stored in unbalanced binary search trees
     private static class BinaryNode<AnyType>
     {
@@ -281,6 +296,11 @@ public class BinarySearchTree<AnyType extends Comparable<? super AnyType>>
     public static void main( String [ ] args )
     {
         BinarySearchTree<Integer> t = new BinarySearchTree<>( );
+        BinarySearchTree<Integer> x = new BinarySearchTree<>();
+        x.insert(2);
+        x.insert(1);
+        x.insert(3);
+        System.out.println(x.isFull());
         // final int NUMS = 4000;
         // final int GAP  =   37;
 
@@ -289,12 +309,13 @@ public class BinarySearchTree<AnyType extends Comparable<? super AnyType>>
         // for( int i = GAP; i != 0; i = ( i + GAP ) % NUMS )
         //     t.insert( i );
 
-        
+        System.out.println(t.isFull());
         for(int i = 0; i<10;i++){
             t.insert(i);
         }
         // t.printTree();
         System.out.println(t.nodeCount());
+        System.out.println(t.isFull());
         // if( NUMS < 40 )
         //     t.printTree( );
         // if( t.findMin( ) != 2 || t.findMax( ) != NUMS - 2 )
