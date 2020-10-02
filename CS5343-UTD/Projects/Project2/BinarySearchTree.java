@@ -1,3 +1,5 @@
+import jdk.nashorn.api.tree.BinaryTree;
+
 // BinarySearchTree class
 //
 // CONSTRUCTION: with no initializer
@@ -333,6 +335,10 @@ public class BinarySearchTree<AnyType extends Comparable<? super AnyType>>
         return mirrorNode;
     }
 
+    public boolean isMirror(BinarySearchTree<AnyType> t2){
+        BinarySearchTree<AnyType> mirrorTree = mirror();
+        return equals(t2.root,mirrorTree.root);
+    }
     // Basic node stored in unbalanced binary search trees
     private static class BinaryNode<AnyType>
     {
@@ -389,6 +395,8 @@ public class BinarySearchTree<AnyType extends Comparable<? super AnyType>>
         System.out.println(t.equals(t));
         x = t.mirror();
         x.printTree();
+        System.out.println("---");
+        System.out.println(x.isMirror(t));
         // t.printTree();
         
         // if( NUMS < 40 )
