@@ -416,20 +416,29 @@ public class BinarySearchTree<AnyType extends Comparable<? super AnyType>>
     public static void main( String [ ] args )
     {
         BinarySearchTree<Integer> t1 = new BinarySearchTree<>( );
-        BinarySearchTree<Integer> x = new BinarySearchTree<>();
-        x.insert(2);
-        x.insert(1);
-        x.insert(3);
-        // System.out.println(x.isFull());
+        BinarySearchTree<Integer> t2 = new BinarySearchTree<>();
+        BinarySearchTree<Integer> t3 = new BinarySearchTree<>();
+
+        System.out.println("Making Tree 1");
         for(int i = 5; i>0; i--){
             t1.insert(i);
         }
         for(int i = 5; i<10; i++){
             t1.insert(i);
         }
+        System.out.println("Making Tree 2 like tree 1");
+        for(int i = 50; i>0; i=i-10){
+            t2.insert(i);
+        }
+        for(int i = 50; i<100; i=i+10){
+            t2.insert(i);
+        }
 
         System.out.println("Demonstrating print level");
+        System.out.println("tree 1");
         t1.printLevels();
+        System.out.println("tree 2");
+        t2.printLevels();
         System.out.println("Demonstrating rotate right");
         t1.rotateRight();
         t1.printLevels();
@@ -438,5 +447,20 @@ public class BinarySearchTree<AnyType extends Comparable<? super AnyType>>
         t1.printLevels();
         System.out.println("Node Count is: ");
         System.out.println(t1.nodeCount());
+        System.out.println("Demonstrating copy");
+        t3 = t1.copy();
+        t3.printLevels();
+        System.out.println("Demonstrating compare structure in t1 and t2");
+        boolean isEqual = t1.compareStructure(t2);
+        System.out.println(isEqual);
+        System.out.println("Demonstrating mirror and storing t3 as mirror of t1");
+        t3 = t1.mirror();
+        t3.printLevels();
+        System.out.println("Demonstrating is Mirror in t3 and t1");
+        boolean isMirror = t1.isMirror(t3);
+        System.out.println(isMirror);
+        System.out.println("Demonstrating is Mirror in t1 and t2");
+        boolean isMirror2 = t1.isMirror(t2);
+        System.out.println(isMirror2);
     }
 }
