@@ -319,6 +319,20 @@ public class BinarySearchTree<AnyType extends Comparable<? super AnyType>>
         return copy;
     }
 
+    public BinarySearchTree<AnyType> mirror(){
+        BinarySearchTree<AnyType> t2 = new BinarySearchTree<>();
+        t2.root = mirror(root);
+        return t2;
+    }
+
+    private BinaryNode<AnyType> mirror(BinaryNode<AnyType>t1){
+        if(t1==null)return null;
+        BinaryNode<AnyType> mirrorNode = new BinaryNode<AnyType>(t1.element,null,null);
+        mirrorNode.left = mirror(t1.right);
+        mirrorNode.right = mirror(t1.left);
+        return mirrorNode;
+    }
+
     // Basic node stored in unbalanced binary search trees
     private static class BinaryNode<AnyType>
     {
@@ -373,10 +387,10 @@ public class BinarySearchTree<AnyType extends Comparable<? super AnyType>>
         System.out.println(t.compareStructure(t));
         System.out.println("---");
         System.out.println(t.equals(t));
-        x = t.copy();
+        x = t.mirror();
         x.printTree();
-        System.out.println("---");
-        System.out.println(t.equals(x));
+        // t.printTree();
+        
         // if( NUMS < 40 )
         //     t.printTree( );
         // if( t.findMin( ) != 2 || t.findMax( ) != NUMS - 2 )
