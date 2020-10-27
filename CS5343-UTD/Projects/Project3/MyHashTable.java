@@ -15,6 +15,7 @@
  * Note that all "matching" is based on the equals method.
  * @author Mark Allen Weiss
  */
+
 public class MyHashTable<AnyType>
 {
     /**
